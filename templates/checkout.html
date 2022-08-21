@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% block title%} Checkout - famstore{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="col my-4">
+        <h2>Step 1 - famstore Express Checkout - Review Your Cart Items</h2>
+        <div class="my-4">
+            <ul class="list-group" id="items">
+            </ul>
+            
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-3">
+                  <li class="breadcrumb-item active" aria-current="page">Your cart total is  <b>Rs.<span id="totalPrice"></span></b>.Enter your details below & place your order Thanks for using famstore!</li>
+                </ol>
+              </nav>
+        </div>
+    </div>
+    <div class="col my-4">
+        <h2>Step 2 - Enter Address & Other Details:</h2>
+        <form method="post" action="/shop/checkout/">{% csrf_token %}
+            <input type="hidden" name="itemsJson" id="itemsJson">
+            <input type="hidden" name="amount" id="amount">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputname">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <input type="text" class="form-control" id="address1" name="address1" placeholder="1234 Main St">
+            </div>
+            <div class="form-group">
+                <label for="inputAddress2">Address line 2</label>
+                <input type="text" class="form-control" id="address2" name="address2" placeholder="Apartment, studio, or floor">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="city" name="city">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputState">State</label>
+                    <input type="text" class="form-control" id="state" name="state"  placeholder="Enter State">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" id="zip_code" name="zip_code">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputZip">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" name="phone">
+            </div>
+            <button type="submit" class="btn btn-primary">Place Order</button>
+        </form>
+    </div>
+</div>
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+        <span>Get connected with us on social networks:</span>
+      </div>
+      <!-- Left -->
+  
+      <!-- Right -->
+      <div>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+  
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              <i class="fas fa-gem me-3"></i>famstore
+            </h6>
+            <p>
+              famStore is and e-commerce site which contains famous handicrafted products from different parts of India.
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Products
+            </h6>
+            <p>
+              <a href="#!" class="text-reset">handicrafts</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Cloths</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Ornaments</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">artwork</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <p><i class="fas fa-home me-3"></i>Telangana,India</p>
+            
+           
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2022 Copyright:
+      <a class="text-reset fw-bold">famStore.tech</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+{% endblock %}
+{% block js %}
+<script>
+if (localStorage.getItem('cart') == null) {
+    var cart = {};
+} else {
+    cart = JSON.parse(localStorage.getItem('cart'));
+}
+console.log(cart);
+var sum = 0;
+var totalPrice=0;
+if ($.isEmptyObject(cart)) {
+    //if object is empty
+    mystr = `<p>Your cart is empty, please add some items to your cart before checking out!</p>`
+    $('#items').append(mystr);
+} else {
+    for (item in cart) {
+        let name = cart[item][1];
+        let qty = cart[item][0];
+        let itemPrice = cart[item][2];
+        sum = sum + qty;
+        totalPrice = totalPrice + qty*itemPrice;
+        mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${name}
+                    <span class="badge badge-primary badge-pill">${qty}</span>
+                </li>`
+        $('#items').append(mystr);
+    }
+}
+document.getElementById('cart').innerHTML = sum;
+document.getElementById('totalPrice').innerHTML = totalPrice;
+$('#itemsJson').val(JSON.stringify(cart));
+{% if thank %}
+alert('Thanks for ordering with us. Your order is is {{id}}. Use it to track your order using our order tracker');
+localStorage.clear();
+document.location = "/shop";
+{% endif %}
+$('#amount').val($('#totalPrice').html())
+</script>
+{% endblock %}
